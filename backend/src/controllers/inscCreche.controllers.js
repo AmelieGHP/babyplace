@@ -4,10 +4,12 @@ const inscCrecheModels = require("../models/inscCreche.models.js");
 const getCrecheInfo = (req, res) => {
   const table = "creche";
   const email = req.query.email;
+  // console.log(email); OK
   inscStructureModels
     .getStructureInfo(table, email)
-    .then(([[result]]) => {
-      res.send(result).status(200);
+    .then((result) => {
+      // console.log(result);
+      res.json(result).status(200);
     })
     .catch((err) => {
       console.error(err);
@@ -30,14 +32,9 @@ const crecheExist = (req, res) => {
 };
 
 const inscriptionCreche1 = (req, res) => {
-  const {
-    typeCreche,
-    nomStructure,
-    adresseStructure,
-    telephone,
-    email,
-  } = req.body;
-  const isCreche = 1 ;
+  const { typeCreche, nomStructure, adresseStructure, telephone, email } =
+    req.body;
+  const isCreche = 1;
   inscStructureModels
     .inscriptionStructure1(isCreche, adresseStructure, telephone, email)
     .then(([structure]) => {

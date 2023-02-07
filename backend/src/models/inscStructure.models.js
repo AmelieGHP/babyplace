@@ -6,11 +6,20 @@ const getIsCreche = (email) => {
   ]);
 };
 
-const getStructureInfo = (table, email) => {
-  return datasource.query(
+// const getStructureInfo = (table, email) => {
+//   return datasource.query(
+//     `SELECT * FROM structure INNER JOIN ${table} ON ${table}.structureId=structure.structureId WHERE email = ?`,
+//     [email]
+//   );
+// };
+
+const getStructureInfo = async (table, email) => {
+  const result = await datasource.query(
     `SELECT * FROM structure INNER JOIN ${table} ON ${table}.structureId=structure.structureId WHERE email = ?`,
     [email]
   );
+  // console.log(result);
+  return result;
 };
 
 const getStructureId = (email) => {
